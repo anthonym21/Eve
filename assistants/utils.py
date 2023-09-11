@@ -11,5 +11,4 @@ def get_file_paths(script_dir:str, foldername:str, personality:str, system_chang
             return foldername_dir, personality_dir, keys
         
 def get_personality_dir(script_dir:str, personality:str):
-     personality_dir = os.path.join(script_dir, f"prompts/{personality}.txt")
-     return personality_dir
+        return os.path.join(script_dir, f"prompts/{personality}.txt")

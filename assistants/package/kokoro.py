@@ -84,7 +84,7 @@ class Kokoro:
                 if f"{keyword}" in user_input:
                     print("Keyword heard")
                     break
-                for i, word in enumerate(user_input):
+                for word in user_input:
                     check_quit(word)
 
     def response_completion(self, append=True):
@@ -142,5 +142,4 @@ class Kokoro:
             model=model_id,
             file=speech
         )
-        response = completion['text']
-        return response
+        return completion['text']
