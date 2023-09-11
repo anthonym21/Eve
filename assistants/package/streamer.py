@@ -30,7 +30,7 @@ class Streamer:
                         print("You said: ", user_input) # Checking    
                     else:
                         user_input = self.chatGPT.r.recognize_google(audio)
-                
+
                 except Exception as e:
                     print(e)
                     continue
@@ -40,12 +40,11 @@ class Streamer:
                 modified_text = self.attention.mode.replace('<<user_input>>', user_input)
                 self.attention.messages = [{"role" : "user", "content" : modified_text}]
                 check_attention = self.attention.response_completion()
-                
+
                 if "no" in check_attention.lower():
                     continue
-                else:
-                    self.chatGPT.messages.append({"role" : "user", "content" : user_input})
-                    self.streamer_completion(save_foldername, suffix, useEL)
+                self.chatGPT.messages.append({"role" : "user", "content" : user_input})
+                self.streamer_completion(save_foldername, suffix, useEL)
 
                 start_time = time.time()
                 while True:
@@ -60,7 +59,7 @@ class Streamer:
                         if time.time() - start_time > timeout:
                             break
                         continue
-                    
+
                     try:
                         self.chatGPT.messages.append({"role" : "user" , "content" : user_input})
                         self.streamer_completion(save_foldername, suffix, useEL)

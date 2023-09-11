@@ -27,20 +27,19 @@ class Chat:
                 audio = self.chatGPT.listen_for_voice(timeout=None)
                 try:
                     if usewhisper:
-                        if audio:
-                            user_input = self.chatGPT.whisper(audio)
-                            print("You said: ", user_input) # Checking
-                        else:
+                        if not audio:
                             raise ValueError("Empty audio input")
+                        user_input = self.chatGPT.whisper(audio)
+                        print("You said: ", user_input) # Checking
                     else:    
                         user_input = self.chatGPT.r.recognize_google(audio)
-                    
+
                 except Exception as e:
                     print(e)
                     continue
 
                 check_quit(user_input)
-                
+
                 # This merely appends the list of dictionaries, it doesn't overwrite the existing
                 # entries.  It should change the behavior of chatGPT though based on the text file.
                 if updatein != '':
